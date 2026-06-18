@@ -1,1 +1,3 @@
-/uploads
+app/data/uploads/*
+!app/data/uploads/.gitkeep
+config.py
