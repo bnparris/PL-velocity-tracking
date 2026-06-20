@@ -23,22 +23,20 @@ def silent_remove(filepath):
 @app.route('/', methods = ['GET', 'POST'])
 def home():
     form = VideoUploadForm()
-    vid_exists = None
-    filename=None
     if form.validate_on_submit():
         unique_str = str(uuid4())
         filename = secure_filename(f'{unique_str}-{form.video.data.filename}')
         filepath = os.path.join(Config.UPLOAD_FOLDER, filename)
         form.video.data.save(filepath)
-        vid_exists = True
-    return render_template('upload_video.html', title='Upload Video', form = form, vid_exists = vid_exists, filename = filename)
+        return redirect(url_for('analyse_video', filename = filename))
+    return render_template('upload_video.html', title='Upload Video', form = form)
 
-@app.route('/uploads/<path:filename>')
-def uploaded_file(filename):
-    return send_from_directory("data/uploads", filename)
+@app.route('/analyse_video/<filename>', methods = ['GET', 'POST'])
+def analyse_video(filename):
+    return render_template('analyse_video.html', filename= filename)
 
 
+@app.route('/video_path/<filename>')
+def video_path(filename):
+    return send_from_directory(Config.UPLOAD_FOLDER, filename)
 
-@app.route('/menu')
-def menu():
-    return render_template('menu.html', title ='Menu')

@@ -9,15 +9,6 @@
         {{wtf.form_field(form.submit, False)}}
     </form>
 
-    {%if vid_exists%}
-<!--    <img src={{url_for("uploaded_file", filename =filename)}} alt="image">-->
-
-
-    <video width="320" height="240" controls autoplay>
-      <source src={{url_for('uploaded_file', filename =filename)}} type="video/mp4">
-    </video>
-    {%endif%}
-
 
 
 </div>

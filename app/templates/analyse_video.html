@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+{% block body%}
+{% import "bootstrap_wtf.html" as wtf%}
+<div class  = 'container mt-3'>
+
+    <video width="320" height="240" controls autoplay>
+      <source src={{url_for('video_path', filename =filename)}} type="video/mp4">
+    </video>
+
+</div>
+
+{%endblock%}
